@@ -12,7 +12,12 @@ function getComputerChoice() {
 
 function getUserChoice() { 
   let playerAnswer = prompt("What is your choice?"); 
+  if(playerAnswer == "rock" || playerAnswer == "Rock"
+  || playerAnswer == "paper" || playerAnswer == "Paper"
+  || playerAnswer == "scissors" || playerAnswer == "Scissors") {
   console.log("Player's Choice: " + playerAnswer); 
+  }
+  else getUserChoice(); 
 }
 
 getComputerChoice(); 
