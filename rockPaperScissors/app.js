@@ -1,3 +1,17 @@
-const myNumber = Math.floor(Math.random() * 4) + 1; 
-console.log(myNumber); 
 
+let computerChoice;  
+let playerChoice; 
+
+function getComputerChoice() {
+  let choiceMade = Math.floor(Math.random() * 3) + 1; 
+  if(choiceMade == 1) computerChoice = "rock"; 
+  else if(choiceMade == 2) computerChoice = "paper";
+  else computerChoice = "scissors"; 
+  console.log("Computer choice: " + computerChoice); 
+}
+
+function getUserChoice() { 
+  
+}
+
+getComputerChoice(); 
