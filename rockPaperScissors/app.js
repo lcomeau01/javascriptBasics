@@ -11,7 +11,9 @@ function getComputerChoice() {
 }
 
 function getUserChoice() { 
-  
+  let playerAnswer = prompt("What is your choice?"); 
+  console.log("Player's Choice: " + playerAnswer); 
 }
 
 getComputerChoice(); 
+getUserChoice(); 
