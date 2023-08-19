@@ -15,22 +15,27 @@ function getComputerChoice() {
   if(choiceMade == 1) computerChoice = "rock"; 
   else if(choiceMade == 2) computerChoice = "paper";
   else computerChoice = "scissors"; 
-  console.log("Computer choice: " + computerChoice); 
 }
 
 function getUserChoice() { 
   playerChoice = prompt("What is your choice?"); 
-  playerChoice.toLowerCase(); 
-  playerChoice.trim(); 
+  playerChoice = playerChoice.toLowerCase(); 
+  playerChoice = playerChoice.trim(); 
   if (playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")
   { 
-    console.log("Player's Choice: " + playerChoice); 
+    return; 
   }
   else getUserChoice(); 
 }
 
 function whoWins() { 
   if(playerChoice === computerChoice) tie = true; 
+  else if (playerChoice == "rock" && computerChoice == "paper") computerWins = true; 
+  else if (playerChoice == "rock" && computerChoice == "scissors") playerWins = true; 
+  else if (playerChoice == "paper" && computerChoice == "scissors") computerWins = true; 
+  else if (playerChoice == "paper" && computerChoice == "rock") playerWins = true; 
+  else if (playerChoice == "scissors" && computerChoice == "rock") computerWins = true; 
+  else if (playerChoice == "scissors" && computerChoice == "paper") playerWins = true; 
 }
 
 function keepScore() { 
@@ -60,11 +65,7 @@ function playGame() {
     getUserChoice();
     getComputerChoice(); 
     whoWins(); 
-    let finalMessage = keepScore();
-    console.log("Win Count: " + winCounts); 
-    console.log("Loss Count: " + lossCounts); 
-    console.log("Tie Count: " + tieCounts); 
-    console.log(finalMessage);  
+    console.log(keepScore());  
     reset(); 
   }
   if (winCounts == 5) console.log("YOU WIN!"); 
