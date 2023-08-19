@@ -1,6 +1,8 @@
 
 let computerChoice;  
 let playerChoice; 
+let playerWins; 
+let computerWins; 
 
 playGame(); 
 
@@ -21,6 +23,11 @@ function getUserChoice() {
   }
   else getUserChoice(); 
 }
+
+function whoWins() { 
+  
+}
+
 function playGame() { 
   getComputerChoice(); 
   getUserChoice(); 
