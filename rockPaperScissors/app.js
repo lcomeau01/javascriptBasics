@@ -2,6 +2,8 @@
 let computerChoice;  
 let playerChoice; 
 
+playGame(); 
+
 function getComputerChoice() {
   let choiceMade = Math.floor(Math.random() * 3) + 1; 
   if(choiceMade == 1) computerChoice = "rock"; 
@@ -19,6 +21,7 @@ function getUserChoice() {
   }
   else getUserChoice(); 
 }
-
-getComputerChoice(); 
-getUserChoice(); 
+function playGame() { 
+  getComputerChoice(); 
+  getUserChoice(); 
+}
