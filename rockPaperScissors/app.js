@@ -1,29 +1,45 @@
-let winCounts = 0; 
-let lossCounts = 0; 
-let tieCounts = 0;
- 
- playGame(); 
+
+playGame(); 
 
 function playGame() { 
   
-  while (winCounts != 5 && lossCounts != 5)
+  let winCounts = 0; 
+  let lossCounts = 0; 
+  let tieCounts = 0; 
+
+  for (let i = 0; i < 5; i++)
   { 
     let playerChoice = getUserChoice();
     let computerChoice = getComputerChoice(); 
-    let score = roundPlayed(playerChoice, computerChoice); 
-    console.log(score);  
+    if(playerChoice === computerChoice) { 
+      ++tieCounts; 
+      console.log("You tied!"); 
+    }
+    else { 
+      let winBool = roundPlayed(playerChoice, computerChoice); 
+      if (winBool == true) { 
+        ++winCounts; 
+        console.log("You win " + playerChoice + " beats " + computerChoice); 
+      }
+      else { 
+        ++lossCounts; 
+        console.log("You lose " + computerChoice + " beats " + playerChoice); 
+      }
+    }
+    
   }
-  if (winCounts == 5) console.log("YOU WIN!"); 
-  else console.log("YOU LOSE!"); 
-  reset(); 
+  if (winCounts > lossCounts) console.log("YOU WIN!"); 
+  else if (winCounts < lossCounts) console.log("YOU LOSE!"); 
+  else if ((winCounts == lossCounts) && tieCounts > 0) console.log("YOU TIED"); 
 }
 
 function getComputerChoice() {
+  let computer; 
   let choiceMade = Math.floor(Math.random() * 3) + 1; 
-  if(choiceMade == 1) computerChoice = "rock"; 
-  else if(choiceMade == 2) computerChoice = "paper";
-  else computerChoice = "scissors"; 
-  return computerChoice; 
+  if(choiceMade == 1) computer = "rock"; 
+  else if(choiceMade == 2) computer = "paper";
+  else computer = "scissors"; 
+  return computer; 
 }
 
 function getUserChoice() { 
@@ -39,26 +55,14 @@ function getUserChoice() {
 
 function roundPlayed(playerChoice, computerChoice) { 
   let playerWins = false; 
-
-  if(playerChoice === computerChoice) { 
-    ++tieCounts; 
-    return "You tied!"; 
-  }
-  else if (playerChoice == "rock" && computerChoice == "paper") playerWins = false; 
+  if (playerChoice == "rock" && computerChoice == "paper") playerWins = false; 
   else if (playerChoice == "rock" && computerChoice == "scissors") playerWins = true; 
   else if (playerChoice == "paper" && computerChoice == "scissors") playerWins = false; 
   else if (playerChoice == "paper" && computerChoice == "rock") playerWins = true; 
   else if (playerChoice == "scissors" && computerChoice == "rock") playerWins = false; 
   else if (playerChoice == "scissors" && computerChoice == "paper") playerWins = true; 
 
-  if (playerWins == true) { 
-    ++winCounts; 
-    return "You win " + playerChoice + " beats " + computerChoice;
-  }
-  else if (playerWins == false) { 
-    ++lossCounts; 
-    return "You lose " + computerChoice + " beats " + playerChoice;
-  }
+  return playerWins; 
 }
 
 
