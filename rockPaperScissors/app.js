@@ -1,20 +1,29 @@
-
-let computerChoice; 
-let playerChoice;  
-let playerWins = false; 
-let computerWins = false; 
-let tie = false; 
 let winCounts = 0; 
 let lossCounts = 0; 
-let tieCounts = 0; 
+let tieCounts = 0;
+ 
+ playGame(); 
 
-playGame(); 
+function playGame() { 
+  
+  while (winCounts != 5 && lossCounts != 5)
+  { 
+    let playerChoice = getUserChoice();
+    let computerChoice = getComputerChoice(); 
+    let score = roundPlayed(playerChoice, computerChoice); 
+    console.log(score);  
+  }
+  if (winCounts == 5) console.log("YOU WIN!"); 
+  else console.log("YOU LOSE!"); 
+  reset(); 
+}
 
 function getComputerChoice() {
   let choiceMade = Math.floor(Math.random() * 3) + 1; 
   if(choiceMade == 1) computerChoice = "rock"; 
   else if(choiceMade == 2) computerChoice = "paper";
   else computerChoice = "scissors"; 
+  return computerChoice; 
 }
 
 function getUserChoice() { 
@@ -23,52 +32,33 @@ function getUserChoice() {
   playerChoice = playerChoice.trim(); 
   if (playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")
   { 
-    return; 
+    return playerChoice; 
   }
   else getUserChoice(); 
 }
 
-function whoWins() { 
-  if(playerChoice === computerChoice) tie = true; 
-  else if (playerChoice == "rock" && computerChoice == "paper") computerWins = true; 
-  else if (playerChoice == "rock" && computerChoice == "scissors") playerWins = true; 
-  else if (playerChoice == "paper" && computerChoice == "scissors") computerWins = true; 
-  else if (playerChoice == "paper" && computerChoice == "rock") playerWins = true; 
-  else if (playerChoice == "scissors" && computerChoice == "rock") computerWins = true; 
-  else if (playerChoice == "scissors" && computerChoice == "paper") playerWins = true; 
-}
+function roundPlayed(playerChoice, computerChoice) { 
+  let playerWins = false; 
 
-function keepScore() { 
-  if (computerWins == true) { 
-    ++lossCounts; 
-    return "You lose " + computerChoice + " beats " + playerChoice; 
-  }
-  else if (playerWins == true) { 
-    ++winCounts; 
-    return "You win " + playerChoice + " beats " + computerChoice; 
-  }
-  else if (tie == true) { 
+  if(playerChoice === computerChoice) { 
     ++tieCounts; 
     return "You tied!"; 
   }
-}
+  else if (playerChoice == "rock" && computerChoice == "paper") playerWins = false; 
+  else if (playerChoice == "rock" && computerChoice == "scissors") playerWins = true; 
+  else if (playerChoice == "paper" && computerChoice == "scissors") playerWins = false; 
+  else if (playerChoice == "paper" && computerChoice == "rock") playerWins = true; 
+  else if (playerChoice == "scissors" && computerChoice == "rock") playerWins = false; 
+  else if (playerChoice == "scissors" && computerChoice == "paper") playerWins = true; 
 
-function reset() { 
-  computerWins = false; 
-  playerWins = false; 
-  tie = false; 
-}
-
-function playGame() { 
-  while (winCounts != 5 && lossCounts != 5)
-  { 
-    getUserChoice();
-    getComputerChoice(); 
-    whoWins(); 
-    console.log(keepScore());  
-    reset(); 
+  if (playerWins == true) { 
+    ++winCounts; 
+    return "You win " + playerChoice + " beats " + computerChoice;
   }
-  if (winCounts == 5) console.log("YOU WIN!"); 
-  else console.log("YOU LOSE!"); 
-  reset(); 
+  else if (playerWins == false) { 
+    ++lossCounts; 
+    return "You lose " + computerChoice + " beats " + playerChoice;
+  }
 }
+
+
