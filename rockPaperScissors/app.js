@@ -2,7 +2,6 @@
 playGame(); 
 
 function playGame() { 
-  
   let winCounts = 0; 
   let lossCounts = 0; 
   let tieCounts = 0; 
@@ -26,27 +25,28 @@ function playGame() {
         console.log("You lose " + computerChoice + " beats " + playerChoice); 
       }
     }
-    
   }
+
   if (winCounts > lossCounts) console.log("YOU WIN!"); 
   else if (winCounts < lossCounts) console.log("YOU LOSE!"); 
   else if ((winCounts == lossCounts) && tieCounts > 0) console.log("YOU TIED"); 
 }
 
 function getComputerChoice() {
-  let computer; 
+  let computerChoice; 
   let choiceMade = Math.floor(Math.random() * 3) + 1; 
-  if(choiceMade == 1) computer = "rock"; 
-  else if(choiceMade == 2) computer = "paper";
-  else computer = "scissors"; 
-  return computer; 
+  if(choiceMade == 1) computerChoice = "rock"; 
+  else if(choiceMade == 2) computerChoice = "paper";
+  else computerChoice = "scissors"; 
+  return computerChoice; 
 }
 
 function getUserChoice() { 
   playerChoice = prompt("What is your choice?"); 
   playerChoice = playerChoice.toLowerCase(); 
   playerChoice = playerChoice.trim(); 
-  if (playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")
+  if (playerChoice == "rock" || playerChoice == "paper" 
+                             || playerChoice == "scissors")
   { 
     return playerChoice; 
   }
